@@ -1,0 +1,11 @@
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore development files
+node_modules/
+.env
+
+# Professional Cleanliness
+wp-config.php
+*.log
