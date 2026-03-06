@@ -1,8 +1,115 @@
 /*
 Theme Name: MedSpa Custom 2026
 Author: Michael Vincent Ozon
-Description: High-performance, custom-built theme for luxury medical spas.
-Version: 1.0.0
-License: GNU General Public License v2 or later
-Text Domain: medspa-custom
+Version: 1.2.0
 */
+
+/* 1. ARCHITECTURE & PERFORMANCE */
+:root {
+    --gold: #bc9c22;
+    --dark: #1a1a1a;
+    --light: #f9f9f9;
+    --white: #ffffff;
+    --text: #333333;
+    --font-h: 'Playfair Display', serif;
+    --font-b: 'Montserrat', sans-serif;
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+
+/* 2. RESET & BASE (FAST LOAD) */
+* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+body { 
+    margin: 0; padding: 0; 
+    font-family: var(--font-b); 
+    color: var(--text); 
+    line-height: 1.6; 
+    overflow-x: hidden;
+}
+
+/* 3. TYPOGRAPHY SYSTEM */
+h1, h2, h3 { font-family: var(--font-h); color: var(--dark); margin: 0; }
+.italic { font-style: italic; font-weight: 400; }
+
+/* 4. REUSABLE COMPONENTS */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+/* 5. HERO (OPTIMIZED PARALLAX) */
+.hero-wrapper {
+    position: relative; height: 85vh; width: 100%;
+    display: flex; align-items: center;
+    background: #000 url('assets/images/spa-hero.jpg') no-repeat center center / cover;
+    background-attachment: fixed;
+}
+.hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+}
+.hero-content { position: relative; z-index: 5; color: var(--white); }
+.hero-subtitle { 
+    display: block; font-size: 11px; font-weight: 600; 
+    text-transform: uppercase; letter-spacing: 5px; color: var(--gold);
+    margin-bottom: 1.5rem;
+}
+.hero-title { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.1; margin-bottom: 2rem; }
+.hero-desc { max-width: 500px; font-size: 1.1rem; opacity: 0.8; margin-bottom: 3rem; }
+
+/* 6. BUTTONS (UI REFINEMENT) */
+.btn-primary {
+    display: inline-block; background: var(--gold); color: var(--white);
+    padding: 1.2rem 2.5rem; text-decoration: none; font-size: 11px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 2px;
+    transition: var(--ease) 0.3s;
+}
+.btn-primary:hover { background: var(--white); color: var(--dark); transform: translateY(-3px); }
+
+/* 7. SERVICES GRID (THE "LUXURY" LOOK) */
+.section-header { text-align: center; padding: 100px 0 80px; }
+.title-divider { width: 50px; height: 1px; background: var(--gold); margin: 20px auto; }
+
+.services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px; margin-top: -100px; position: relative; z-index: 10;
+}
+.service-card {
+    background: var(--white); padding: 60px 45px;
+    box-shadow: var(--shadow); transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    border-top: 3px solid var(--gold);
+}
+.service-card:hover { transform: translateY(-15px); box-shadow: 0 40px 80px rgba(0,0,0,0.1); }
+
+/* 8. ICONS & LINKS */
+.card-icon-wrapper {
+    width: 60px; height: 60px; border: 1px solid var(--gold);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2rem; transition: 0.3s var(--ease);
+}
+.card-icon-wrapper i { color: var(--gold); font-size: 1.2rem; }
+.service-card:hover .card-icon-wrapper { background: var(--gold); }
+.service-card:hover .card-icon-wrapper i { color: var(--white); }
+
+.card-title { font-size: 1.6rem; margin-bottom: 1rem; }
+.card-excerpt { font-size: 0.95rem; color: #666; margin-bottom: 2rem; }
+.card-link { 
+    color: var(--dark); text-decoration: none; font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--gold);
+}
+
+/* 9. SCROLL ANIMATION */
+.scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 5; }
+.mouse { width: 20px; height: 35px; border: 2px solid rgba(255,255,255,0.3); border-radius: 20px; position: relative; }
+.mouse::after {
+    content: ''; width: 2px; height: 6px; background: #fff;
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    animation: mouse-move 2s infinite;
+}
+@keyframes mouse-move { 0% { opacity: 0; top: 5px; } 50% { opacity: 1; } 100% { opacity: 0; top: 20px; } }
+
+/* 10. MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero-wrapper { height: 70vh; background-attachment: scroll; }
+    .services-grid { margin-top: 30px; }
+    .hero-title { font-size: 2.5rem; }
+}
